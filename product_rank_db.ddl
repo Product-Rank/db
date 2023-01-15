@@ -40,7 +40,7 @@ create table `company`
     primary key (id)
 ) engine = InnoDB;
 
-create table product
+create table `product`
 (
     id                  bigint       not null auto_increment,
     thumbnail_url       varchar(255),
@@ -50,7 +50,7 @@ create table product
     company_id          bigint,
     primary key (id)
 ) engine = InnoDB;
-create table product_user
+create table `product_user`
 (
     id            bigint       not null auto_increment,
     thumbnail_url varchar(255),
