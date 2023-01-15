@@ -16,20 +16,22 @@ CREATE TABLE `bookmark` (
 	KEY `idx_bookmark_user_id` (`user_id`) USING BTREE,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
-
-create table `comments`
+-- -----------------------------------------------------
+-- Table `product_user`
+-- -----------------------------------------------------
+create table `product_user`
 (
-    `id`         bigint       not null auto_increment,
-    `comment`    varchar(255) not null,
-    `like_cnt`   bigint,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    parents_id bigint,
-    product_id bigint,
-    user_id    bigint,
+    id            bigint       not null auto_increment,
+    thumbnail_url varchar(255),
+    email         varchar(255) not null,
+    nick_name     varchar(255),
+    sns_type      varchar(255) not null,
+    user_name     varchar(255) not null,
     primary key (id)
 ) engine = InnoDB;
-
+-- -----------------------------------------------------
+-- Table `company`
+-- -----------------------------------------------------
 create table `company`
 (
     `id`                  bigint       not null auto_increment,
@@ -39,7 +41,9 @@ create table `company`
     user_id             bigint,
     primary key (id)
 ) engine = InnoDB;
-
+-- -----------------------------------------------------
+-- Table `product`
+-- -----------------------------------------------------
 create table `product`
 (
     id                  bigint       not null auto_increment,
@@ -50,14 +54,19 @@ create table `product`
     company_id          bigint,
     primary key (id)
 ) engine = InnoDB;
-create table `product_user`
+-- -----------------------------------------------------
+-- Table `comments`
+-- -----------------------------------------------------
+create table `comments`
 (
-    id            bigint       not null auto_increment,
-    thumbnail_url varchar(255),
-    email         varchar(255) not null,
-    nick_name     varchar(255),
-    sns_type      varchar(255) not null,
-    user_name     varchar(255) not null,
+    `id`         bigint       not null auto_increment,
+    `comment`    varchar(255) not null,
+    `like_cnt`   bigint,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    parents_id bigint,
+    product_id bigint,
+    user_id    bigint,
     primary key (id)
 ) engine = InnoDB;
 alter table comments
