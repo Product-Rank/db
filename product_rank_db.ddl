@@ -98,6 +98,19 @@ create table `product`
     primary key (id)
 ) engine = InnoDB;
 -- -----------------------------------------------------
+-- Table `product_image`
+-- -----------------------------------------------------
+create table `product_image`
+(
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `product_id` INT UNSIGNED NOT NULL,
+	`url` VARCHAR(255) NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	KEY `idx_product_image_product_id` (`product_id`) USING BTREE,
+    primary key (id)
+) engine = InnoDB;
+-- -----------------------------------------------------
 -- Table `comments`
 -- -----------------------------------------------------
 create table `comments`
