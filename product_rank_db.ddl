@@ -8,12 +8,55 @@ USE `product_rank_db` ;
 -- Table `bookmark`
 -- -----------------------------------------------------
 CREATE TABLE `bookmark` (
-	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`user_id` INT UNSIGNED NOT NULL,
 	`product_id` INT UNSIGNED NOT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	KEY `idx_bookmark_user_id` (`user_id`) USING BTREE,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+-- -----------------------------------------------------
+-- Table `ranking`
+-- -----------------------------------------------------
+CREATE TABLE `ranking` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`product_id` INT UNSIGNED NOT NULL,
+	`type` VARCHAR(255) NOT NULL,
+	`year` SMALLINT,
+	`month` TINYINT,
+	`week` TINYINT,
+	`day` TINYINT,
+	`rank` TINYINT,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	KEY `idx_ranking_product_id` (`product_id`) USING BTREE,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+-- -----------------------------------------------------
+-- Table `questionnaire`
+-- -----------------------------------------------------
+CREATE TABLE `questionnaire` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT UNSIGNED NOT NULL,
+	`question` TEXT,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	KEY `idx_questionnaire_user_id` (`user_id`) USING BTREE,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+-- -----------------------------------------------------
+-- Table `community`
+-- -----------------------------------------------------
+CREATE TABLE `community` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT UNSIGNED NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`contents` TEXT,
+	`view` INT UNSIGNED NOT NULL DEFAULT 0,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	KEY `idx_community_user_id` (`user_id`) USING BTREE,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
@@ -69,11 +112,3 @@ create table `comments`
     user_id    bigint,
     primary key (id)
 ) engine = InnoDB;
-alter table comments
-    add constraint FKj9to9e3tjoimlgn3w4vjm4xe3 foreign key (product_id) references product (id);
-alter table comments
-    add constraint FKd0asydy8kwqj5f6l6okr43hbl foreign key (user_id) references product_user (id);
-alter table company
-    add constraint FKsgw1969061fdsrl9d4hv3ouq1 foreign key (user_id) references product_user (id);
-alter table product
-    add constraint FKghawd5rtv8ok565nwpdyyuto9 foreign key (company_id) references company (id);
